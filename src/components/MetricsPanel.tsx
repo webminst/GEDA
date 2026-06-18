@@ -14,8 +14,13 @@ export default function MetricsPanel({ metrics, model }: MetricsPanelProps) {
   const [probOfSuccess, setProbOfSuccess] = useState<number | null>(null);
 
   const runSimulation = () => {
-    const prob = model.predictProbability(simAV1, simAV2);
-    setProbOfSuccess(parseFloat((prob * 100).toFixed(1)));
+    const avgAVs = (simAV1 + simAV2) / 2;
+    if (avgAVs < 4.0) {
+      setProbOfSuccess(0);
+    } else {
+      const prob = model.predictProbability(simAV1, simAV2);
+      setProbOfSuccess(parseFloat((prob * 100).toFixed(1)));
+    }
   };
 
   const getStatusColor = (prob: number) => {
@@ -181,7 +186,7 @@ export default function MetricsPanel({ metrics, model }: MetricsPanelProps) {
                 ) : (
                   <>
                     <AlertTriangle size={16} className="shrink-0 mt-0.5 text-rose-500" />
-                    <span>Risco de Desistência Crítico. Requer intervenção pedagógica orientada imediatamente!</span>
+                    <span>{(simAV1 + simAV2) / 2 < 4.0 ? 'Reprovado automaticamente - a média parcial (AV1 + AV2) é inferior a 4.0.' : 'Risco de Desistência Crítico. Requer intervenção pedagógica orientada imediatamente!'}</span>
                   </>
                 )}
               </div>
