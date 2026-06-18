@@ -1,0 +1,6 @@
+{
+  "name": "GEDA - Gestão Acadêmica de Desempenho",
+  "description": "Dashboard analítico com previsões de aprovação baseadas nos dados de avaliações, clusterização de perfis e relatórios gerados por Inteligência Artificial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
